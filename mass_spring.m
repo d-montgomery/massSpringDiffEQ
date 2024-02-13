@@ -187,7 +187,7 @@ for i = 1:length(t)
         plot([-2*lm,2*lm],[-L+min(F(t)) -L+min(F(t))],'k:',LineWidth=1)
     end
 
-    % % plot rectangle for mass
+    % plot rectangle for mass
     rectangle('Position',[-lm,x(i)-lm/2,2*lm,lm],'FaceColor','k')
     
     % figure properties
