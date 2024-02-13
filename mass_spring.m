@@ -144,12 +144,14 @@ else
     lWidth = 4;
 end
 
-% Animate the motion
+% Setup figure for animating the motion
 ax = figure();
 if ~strcmpi(saveVideo,'true')
     set(ax, 'Position', figPosition);
 end
 ylim([-L+min(F(t)), max(x)+lm])
+
+% Time loop for animating
 for i = 1:length(t)
     clf;
 
@@ -164,7 +166,7 @@ for i = 1:length(t)
     hold on
     
     % Display damper if present
-    if b ~= 0 % shift left if there is damping
+    if b > 0 
         dw = 0.2;
         dc = lm/5;
         d_l = dc-dw*1.2;
@@ -175,6 +177,7 @@ for i = 1:length(t)
         plot([dc dc],[x(i)-0.875*l x(i)],'-k',LineWidth=2)
         plot([dc-0.9*dw, dc+0.9*dw],[x(i)-0.875*l x(i)-0.875*l],'-k',LineWidth=2)
     end
+    
     % plot equilibrium line y = 0
     plot([-2*lm,2*lm],[0 0],'k--')
 
@@ -190,7 +193,7 @@ for i = 1:length(t)
     % plot rectangle for mass
     rectangle('Position',[-lm,x(i)-lm/2,2*lm,lm],'FaceColor','k')
     
-    % figure properties
+    % figure properties for subplot(1,2,1) 
     set(gca,'XTick',[],'YTick',[])
     ymin = -L+min(F(t));
     ymax = max(x)+lm;
@@ -198,15 +201,20 @@ for i = 1:length(t)
     sgtitle([titleName,'Time = ',num2str(t(i),'%.2f'),' s'],...
             'FontWeight','bold','FontSize',fSize+4)
     
+    % Solution on right
+    subplot(1,2,2) 
 
-    subplot(1,2,2) % Solution on right
+    % Plot the solution
     plot(t,x,LineWidth=lWidth)
     hold on
-    % Plot marker of solution in time
+    
+    % Plot marker of where mass is in solution
     plot(t(i),x(i),'ks',MarkerSize=mSize,MarkerFaceColor='k')
+    
     % plot equilibrium line y = 0
     plot([t(1),t(end)],[0 0],'k--')
 
+    % figure properties for subplot(1,2,2) 
     xlabel('Time [s]','FontSize',fSize)
     ylabel('Displacement from Equilibrium [m]','FontSize',fSize)
     ylim([ymin, ymax])
@@ -216,7 +224,7 @@ for i = 1:length(t)
         % Write the current frame to the video file
         set(gcf, 'Renderer', 'painters'); % or 'painters'
         writeVideo(videoObj, getframe(gcf));
-    else
+    else % pause for consistent visualizations
         if i == 1
             pause(2); % hold IC for visualization
         else
@@ -227,8 +235,8 @@ for i = 1:length(t)
     
 end
 
+% Close the video file
 if strcmpi(saveVideo,'true')
-    % Close the video file
     close(videoObj);
 end
 
