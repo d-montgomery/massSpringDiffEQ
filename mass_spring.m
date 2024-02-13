@@ -1,5 +1,5 @@
 % Animating a mass spring system
-% Author: Dr. David Montgomery, Colorado School of 
+% Author: Dr. David Montgomery, Colorado School of Mines
 % Code tested in Matlab R2023b
 % 
 % Equation of Motion for mass spring system is:
