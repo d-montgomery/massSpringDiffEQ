@@ -10,14 +10,14 @@
 % The forcing function has amplitude F0 and forcing frequency gamma.
 %
 % Choose from the folowing examples:
-% example = 'Freestyle' to edit parameters freely
-%         = 'Undamped' for undamped free vibrations
-%         = 'Underdamped' for underdamped free vibrations
-%         = 'Overdamped' for overdamped free vibrations
-%         = 'Critical' for critically damped free vibrations
-%         = 'Forced' for underdamped forced vibrations
-%         = 'Beats' for undamped forced vibrations w/beats phenomenom
-%         = 'Resonance' for undamped forced vibrations w/resonance
+% example = 'freestyle' to edit parameters freely
+%         = 'undamped' for undamped free vibrations
+%         = 'underdamped' for underdamped free vibrations
+%         = 'overdamped' for overdamped free vibrations
+%         = 'critical' for critically damped free vibrations
+%         = 'forced' for underdamped forced vibrations
+%         = 'beats' for undamped forced vibrations w/beats phenomenom
+%         = 'resonance' for undamped forced vibrations w/resonance
 % 
 % If you want to save a video of the animation set saveVideo = 'true'
 
