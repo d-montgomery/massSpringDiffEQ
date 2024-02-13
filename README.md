@@ -1,5 +1,5 @@
 # Mass Spring System Demonstration for Differential Equations Class
-Author: Dr. David Montgomery, Colorado School of Mines
+Author: Dr. David Montgomery, Department of Applied Mathematics, Colorado School of Mines
 
 This code animates solutions to mx'' + bx' + kx = F(t), with x(0) = P0, x'(0) = V0.
 m is mass, b is the damping constant, k is the spring constant.
@@ -27,3 +27,6 @@ If you want to save a video of the animation set saveVideo = 'true'
 *	Forced Beats: [https://youtu.be/tSj_aM4kR6Y](https://youtu.be/tSj_aM4kR6Y)
 *	Forced Resonance: [https://youtu.be/b3dvTHYS4Dc](https://youtu.be/b3dvTHYS4Dc)
 
+## Sample Images from Animations
+* [Underdamped Free Vibrations](https://github.com/d-montgomery/massSpringDiffEQ/assets/38367298/3cb2c83e-c31d-4e96-80ba-fd997c5b79ad)
+* [Forced Beats](https://github.com/d-montgomery/massSpringDiffEQ/assets/38367298/3c0876f1-e33a-4a5f-87c7-8f9c4d6df990)
