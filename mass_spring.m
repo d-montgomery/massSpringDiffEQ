@@ -62,25 +62,25 @@ lm = 2; % [m]
 disp(' ')
 disp(['example = ',example])
 if strcmpi(example,'undamped')
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = undamped();
     titleName = 'Undamped Free Vibrations:  ';
 elseif strcmpi(example,'underdamped') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = underdamped();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = underdamped();
     titleName = 'Underdamped Free Vibrations:  ';
 elseif strcmpi(example,'overdamped') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = overdamped();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = overdamped();
     titleName = 'Overdamped Free Vibrations:  ';
 elseif strcmpi(example,'critical') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = critical();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = critical();
     titleName = 'Critically Damped Free Vibrations:  ';
 elseif strcmpi(example,'forced') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = forced();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = forced();
     titleName = 'Forced Vibrations Underdamped:  ';
 elseif strcmpi(example,'beats') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = beats();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = beats();
     titleName = 'Forced Beats:  ';
 elseif strcmpi(example,'resonance') 
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = resonance();
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = resonance();
     titleName = 'Forced Resonance:  ';
 else
     titleName = '';
@@ -243,7 +243,7 @@ end
 % ------------------------------------------------------------------------
 % Functions that set parameters for various scenarios
 % ------------------------------------------------------------------------
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped()
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = undamped()
     m = 1; % mass [kg]
     b = 0; % damping constant [kg/s]
     k = 1; % spring constant [kg/s^2]
@@ -259,10 +259,17 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped()
     % Time parameters
     dt = 0.25; % time step for ODE solver
     tf = 60; % Final time for simulation
+
+    % Length of unstretched spring l, and length of stretching s
+    l = 3; % [m]
+    s = 2; % [m]
+    
+    % Height/length of the mass (for visual purposes only)
+    lm = 2; % [m]
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = underdamped()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = underdamped()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = undamped();
 
     b = k/5; % damping constant [kg/s]
 
@@ -271,8 +278,8 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = underdamped()
     tf = 45; % Final time for simulation
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = overdamped()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = overdamped()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = undamped();
 
     b = 4*k; % damping constant [kg/s]
 
@@ -281,8 +288,8 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = overdamped()
     tf = 20; % Final time for simulation
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = critical()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = undamped();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = critical()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = undamped();
 
     b = 2*k; % damping constant [kg/s]
 
@@ -291,8 +298,8 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = critical()
     tf = 20; % Final time for simulation
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = forced()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = underdamped();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = forced()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = underdamped();
     
     % External forcing function F(t) = F0 * sin(gamma*t)
     F0 = 1;
@@ -303,8 +310,8 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = forced()
     V0 = 0;
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = beats()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = forced();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = beats()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = forced();
     
     % No damping
     b = 0;
@@ -326,8 +333,8 @@ function [m,b,k,F0,gamma,P0,V0,dt,tf] = beats()
     tf = 60;
 end
 
-function [m,b,k,F0,gamma,P0,V0,dt,tf] = resonance()
-    [m,b,k,F0,gamma,P0,V0,dt,tf] = forced();
+function [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = resonance()
+    [m,b,k,F0,gamma,P0,V0,dt,tf,l,s,lm] = forced();
     
     % No damping
     b = 0;
